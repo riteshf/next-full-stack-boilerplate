@@ -1,0 +1,24 @@
+overwrite: true
+schema: "./pages/modules/*.gql"
+documents: "./src/graphql/**/*.gql"
+generates:
+  ./server/graphql.ts: # Backend Resolvers
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      contextType: ./apolloContext#Context
+      useIndexSignature: true
+  ./src/graphql/index.ts: # Frontend Types
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+    config:
+      skipTypename: true
+      fetcher:
+        func: "../config/apiClient#useAxios"
+        isReactHook: true
+  ./graphql.schema.json: # Changes Reference file
+    plugins:
+      - introspection
