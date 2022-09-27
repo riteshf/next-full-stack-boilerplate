@@ -1,4 +1,4 @@
-import { useGetCurrentTimeQuery } from "../../graphql/graphql";
+import { useGetCurrentTimeQuery } from "../graphql";
 
 const CurrentTime = () => {
   const { loading, error, data } = useGetCurrentTimeQuery();

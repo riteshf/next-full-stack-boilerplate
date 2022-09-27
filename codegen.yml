@@ -2,7 +2,7 @@ overwrite: true
 schema: "./src/modules/**/*.gql"
 documents: "./src/graphql/**/*.gql"
 generates:
-  ./graphql/graphql.ts: # Backend Resolvers
+  ./src/graphql/index.ts: # Backend Resolvers
     plugins:
       - typescript
       - typescript-resolvers
