@@ -1,6 +1,6 @@
 overwrite: true
-schema: "./modules/**/*.gql"
-documents: "./graphql/**/*.gql"
+schema: "./src/modules/**/*.gql"
+documents: "./src/graphql/**/*.gql"
 generates:
   ./graphql/graphql.ts: # Backend Resolvers
     plugins:
