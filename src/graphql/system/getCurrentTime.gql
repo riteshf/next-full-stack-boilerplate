@@ -1,0 +1,5 @@
+query GetCurrentTime {
+  getCurrentTime {
+    date
+  }
+}

@@ -1,0 +1,9 @@
+scalar Date
+
+type currentDate {
+  date: Date!
+}
+
+type Query {
+  getCurrentTime: currentDate!
+}
