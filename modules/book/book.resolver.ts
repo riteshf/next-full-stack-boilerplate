@@ -1,20 +1,17 @@
-let book = {
-  name: "The Hungarian Sausage",
-  author: "Ben Grunfeld",
-};
+let book = [
+  {
+    id: "1",
+    name: "The Hungarian Sausage",
+    author: "Ben Grunfeld",
+  },
+];
 
 const resolver = {
   Query: {
-    book: () => book,
+    getBooks: () => book,
   },
 
-  Mutation: {
-    updateBook: (root: any, args: any) => {
-      book.name = args.name;
-      book.author = args.author;
-      return book;
-    },
-  },
+  Mutation: {},
 };
 
 export default resolver;

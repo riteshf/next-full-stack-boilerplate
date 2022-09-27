@@ -1,10 +1,11 @@
 type Book {
+  id: String
   name: String
   author: String
 }
 
 type Query {
-  book: Book
+  getBooks: [Book]
 }
 
 type Mutation {

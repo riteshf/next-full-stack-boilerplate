@@ -1,5 +1,5 @@
 import { mergeResolvers } from "@graphql-tools/merge";
-import bookResolver from "./book/book.resolver";
+import bookResolver from "../modules/book/book.resolver";
 
 const resolvers = [bookResolver];
 
