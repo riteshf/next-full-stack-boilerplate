@@ -6,7 +6,6 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -18,27 +17,8 @@ export type Scalars = {
   Date: any;
 };
 
-export type Book = {
-  __typename?: 'Book';
-  author?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  updateBook?: Maybe<Book>;
-};
-
-
-export type MutationUpdateBookArgs = {
-  author: Scalars['String'];
-  name: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
-  getBooks?: Maybe<Array<Maybe<Book>>>;
   getCurrentTime: CurrentDate;
 };
 
@@ -116,10 +96,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Book: ResolverTypeWrapper<Book>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
-  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   currentDate: ResolverTypeWrapper<CurrentDate>;
@@ -127,32 +105,18 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Book: Book;
   Boolean: Scalars['Boolean'];
   Date: Scalars['Date'];
-  Mutation: {};
   Query: {};
   String: Scalars['String'];
   currentDate: CurrentDate;
-};
-
-export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {
-  author?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
   name: 'Date';
 }
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  updateBook?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, RequireFields<MutationUpdateBookArgs, 'author' | 'name'>>;
-};
-
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getBooks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
   getCurrentTime?: Resolver<ResolversTypes['currentDate'], ParentType, ContextType>;
 };
 
@@ -162,18 +126,11 @@ export type CurrentDateResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type Resolvers<ContextType = any> = {
-  Book?: BookResolvers<ContextType>;
   Date?: GraphQLScalarType;
-  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   currentDate?: CurrentDateResolvers<ContextType>;
 };
 
-
-export type GetBooksQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetBooksQuery = { __typename?: 'Query', getBooks?: Array<{ __typename?: 'Book', id?: string | null, name?: string | null, author?: string | null } | null> | null };
 
 export type GetCurrentTimeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -181,42 +138,6 @@ export type GetCurrentTimeQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetCurrentTimeQuery = { __typename?: 'Query', getCurrentTime: { __typename?: 'currentDate', date: any } };
 
 
-export const GetBooksDocument = gql`
-    query GetBooks {
-  getBooks {
-    id
-    name
-    author
-  }
-}
-    `;
-
-/**
- * __useGetBooksQuery__
- *
- * To run a query within a React component, call `useGetBooksQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetBooksQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetBooksQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetBooksQuery(baseOptions?: Apollo.QueryHookOptions<GetBooksQuery, GetBooksQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBooksQuery, GetBooksQueryVariables>(GetBooksDocument, options);
-      }
-export function useGetBooksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBooksQuery, GetBooksQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBooksQuery, GetBooksQueryVariables>(GetBooksDocument, options);
-        }
-export type GetBooksQueryHookResult = ReturnType<typeof useGetBooksQuery>;
-export type GetBooksLazyQueryHookResult = ReturnType<typeof useGetBooksLazyQuery>;
-export type GetBooksQueryResult = Apollo.QueryResult<GetBooksQuery, GetBooksQueryVariables>;
 export const GetCurrentTimeDocument = gql`
     query GetCurrentTime {
   getCurrentTime {

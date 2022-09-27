@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import styles from "../styles/Home.module.css";
-import BookInfo from "../components/BookInfo";
+import CurrentTime from "../components/CurrentTime";
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/api/graphql",
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
             href="https://d27028dliefpk3.cloudfront.net/assets/favicon/favicon.ico"
           />
         </Head>
-        <BookInfo />
+        <CurrentTime />
       </div>
     </ApolloProvider>
   );
